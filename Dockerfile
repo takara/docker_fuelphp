@@ -27,7 +27,16 @@ COPY asset/ttystop /etc/init.d/
 RUN chkconfig --add ttystop
 RUN chkconfig ttystop on
 
+# composer
+RUN curl -s http://getcomposer.org/installer | php
+RUN chmod +x composer.phar
+RUN mv composer.phar /usr/local/bin/composer
+
+RUN apt-get -y install php-mbstring
+
 COPY asset/000-default.conf /etc/apache2/sites-available/
+
+COPY asset/.bash_profile /root/
 
 EXPOSE 80
 
