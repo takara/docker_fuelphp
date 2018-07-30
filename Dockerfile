@@ -33,6 +33,11 @@ RUN chmod +x composer.phar
 RUN mv composer.phar /usr/local/bin/composer
 
 RUN apt-get -y install php-mbstring
+RUN apt-get -y install locales
+RUN locale-gen ja_JP.UTF-8
+ENV LANG ja_JP.UTF-8
+ENV LC_CTYPE ja_JP.UTF-8
+RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
 
 COPY asset/000-default.conf /etc/apache2/sites-available/
 
