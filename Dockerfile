@@ -27,6 +27,8 @@ COPY asset/ttystop /etc/init.d/
 RUN chkconfig --add ttystop
 RUN chkconfig ttystop on
 
+RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
 # composer
 RUN curl -s http://getcomposer.org/installer | php
 RUN chmod +x composer.phar
@@ -42,6 +44,8 @@ RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
 COPY asset/000-default.conf /etc/apache2/sites-available/
 
 COPY asset/.bash_profile /root/
+COPY asset/apache2/php.ini /etc/php/7.0/apache2/
+COPY asset/cli/php.ini /etc/php/7.0/cli/
 
 EXPOSE 80
 
